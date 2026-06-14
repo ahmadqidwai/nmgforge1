@@ -310,6 +310,7 @@ def cluster_pages(pages, page_text, n_keywords=12) -> dict:
     embedding clustering and let the model NAME each cluster (topic-agent).
     """
     idx200 = [p for p in pages if is_html(p) and is_200(p) and indexable(p)]
+    by_url = {_norm(p["Address"]): p for p in idx200}
     clusters = defaultdict(list)
     kw = {}
     for p in idx200:
@@ -329,13 +330,36 @@ def cluster_pages(pages, page_text, n_keywords=12) -> dict:
         member_inl = sorted((inl.get(m, 0) for m in members), reverse=True)
         # authority signal: clear hub if the top page has >=2x the 2nd page's inlinks
         clear_hub = bool(len(member_inl) >= 2 and hub_inlinks >= 2 * (member_inl[1] or 1))
-        # cluster keywords = most common across members (placeholder name)
+        # cluster keywords = most common across members
         ck = Counter()
         for m in members:
             ck.update(kw.get(m, []))
+
+        # Deterministic Naming Logic
+        cluster_name = None
+        if hub:
+            hp = by_url.get(hub, {})
+            # 1. Try H1
+            h1 = (hp.get("H1-1", "") or "").strip()
+            if h1 and h1.lower() not in GENERIC_ANCHORS:
+                cluster_name = h1
+            # 2. Try cleaned Title
+            if not cluster_name:
+                title = (hp.get("Title 1", "") or "").strip()
+                if title:
+                    clean_t = re.split(r" [|—\-] ", title)[0].strip()
+                    if clean_t and clean_t.lower() not in GENERIC_ANCHORS:
+                        cluster_name = clean_t
+
+        # 3. Fallback to top keywords
+        if not cluster_name:
+            top_k = [w for w, _ in ck.most_common(3)]
+            if top_k:
+                cluster_name = " ".join(top_k).title()
+
         out.append({
             "key": topic,
-            "name": None,  # TODO: model names this cluster (topic-agent)
+            "name": cluster_name,
             "size": len(members),
             "pages": members,
             "hub_page": hub,

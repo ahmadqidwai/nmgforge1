@@ -86,6 +86,12 @@ Format per entry:
 **For:** Improving keyword extraction quality by prioritizing strong SEO signals (Title and H1) over general body content.
 
 **Revised?** No.
+18. **Prompt:** Review the current cluster naming logic. Clusters are often named using a single keyword such as "app", "development", or "estimated". Implement a deterministic improvement that generates more descriptive human-readable cluster names using existing cluster keywords and page data. Do not change cluster assignment logic. Preserve report.json compatibility, run the sample dataset, and show before/after examples.
+
+**For:** Improving the readability and usefulness of topical cluster names without changing the underlying clustering algorithm.
+
+**Revised?** No.
+
 
 
 

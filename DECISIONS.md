@@ -62,6 +62,12 @@ Format:
 * `[04:15]` Verified positional weighting update -> report.json and report.html generated successfully and keyword extraction became more aligned with page intent signals.
 
 * `[04:20]` Prioritized heading-based relevance over raw term frequency -> stronger topical signals now have greater influence on clustering and relatedness calculations.
+* `[04:22]` Improved cluster naming quality -> replaced single-keyword cluster labels with more descriptive names derived from cluster keywords and page metadata.
+
+* `[04:25]` Kept cluster assignment logic unchanged -> focused only on naming quality to improve report readability without affecting clustering behavior.
+
+* `[04:30]` Verified cluster naming update -> report.json and report.html generated successfully and cluster names became more understandable for end users.
+
 
 
 

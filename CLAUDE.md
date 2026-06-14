@@ -80,5 +80,10 @@ recommendations**. It serves a live dashboard at localhost:7700 and outputs
 * Title and H1 content receive higher importance than body text when extracting keywords.
 * Keyword extraction quality directly influences clustering, relatedness scoring, entity relationships, and recommendation quality.
 * Positional weighting remains fully deterministic and schema-compatible.
+* Cluster naming should be human-readable and descriptive rather than relying on a single dominant keyword.
+* Cluster assignment and cluster naming are separate concerns and can be improved independently.
+* Improvements to naming should use existing cluster keywords and page metadata while remaining deterministic.
+* Report readability is improved when cluster names reflect topics rather than isolated keywords.
+
 
 
