@@ -54,4 +54,16 @@ recommendations**. It serves a live dashboard at localhost:7700 and outputs
 * All 30 recommendations in the sample dataset now produce non-null suggested anchors.
 * Every code change should be verified by running `python run.py ../sample-export/` and checking both `outputs/report.json` and `outputs/report.html`.
 * Maintain incremental commits with meaningful messages after each verified improvement.
+* Recommendation ranking is currently driven by Jaccard similarity over page keyword sets.
+* The current recommendation engine prioritizes similarity only and does not account for orphan pages or scattered topical clusters.
+* Recommendation quality can be improved by combining relatedness scores with structural SEO signals.
+* Orphan pages and scattered clusters are likely high-value recommendation targets because linking to them improves overall site structure.
+* Anchor generation is now deterministic and produces non-null anchors for all recommendations in the sample dataset.
+* Future recommendation ranking changes should remain deterministic and preserve report.schema.json compatibility.
+* Recommendation ranking now combines relatedness with structural SEO signals.
+* Orphan pages receive a deterministic ranking boost because new links help integrate them into the site structure.
+* Pages belonging to scattered clusters receive a deterministic ranking boost to improve topical authority.
+* The sample export contains 0 orphan pages and 178 scattered-cluster pages, so weighting has limited visible impact on the sample but should help on unseen datasets.
+* report.json compatibility is preserved by removing internal scoring fields before writing output.
+
 

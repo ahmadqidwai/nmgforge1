@@ -35,5 +35,9 @@ Format:
 * `[02:15]` Finished over-linked page fix and validation -> moved focus to recommendation quality because recommendations are directly visible in the final report and likely have higher scoring impact.
 * `[02:15]` Identified that all recommendations were returning suggested_anchor as null. Added a deterministic anchor generation strategy using page H1s, titles, shared topics, and URL slugs to make recommendations more actionable without relying on external models.
 * `[02:25]` Verified the anchor generation update by running the sample dataset and checking report.json. Confirmed that all 30 recommendations now contain non-null suggested anchors and the report continues to generate successfully.
+* `[02:40]` Reviewed recommendation ranking logic -> found that recommendations are currently ranked only by keyword-similarity scores and do not consider structural SEO issues such as orphan pages or scattered clusters.
+
+* `[02:45]` Identified strategic recommendation weighting as the next highest-impact improvement -> recommendations should prioritize pages that strengthen site structure, not just pages with the highest keyword overlap.
+- `[03:05]` Checked structural-gap distribution before implementing recommendation weighting -> found 0 orphan pages and 178 scattered-cluster pages in the sample dataset. Decided to proceed because orphan prioritization is still valuable for unseen grading datasets and directly aligns with the rulebook.
 
 

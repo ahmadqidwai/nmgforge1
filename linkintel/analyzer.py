@@ -356,13 +356,20 @@ def relatedness(page_keywords: dict, top_per_page=5) -> dict:
 # --------------------------------------------------------------------------- #
 # 5. CONTEXTUAL LINK RECOMMENDATIONS  (starter: candidates; model writes anchors)
 # --------------------------------------------------------------------------- #
-def link_candidates(graph, relate: dict, pages, max_per_page=5) -> list:
+def link_candidates(graph, relate: dict, pages, gstats, clusters, max_per_page=5) -> list:
     """For each important page, find topically-related pages it does NOT already
-    link to. Now generates deterministic suggested anchors based on target metadata.
+    link to. Prioritizes targets that fix structural gaps (orphans, scattered clusters).
     """
     idx200 = [p for p in pages if is_html(p) and is_200(p) and indexable(p)]
     by_url = {_norm(p["Address"]): p for p in idx200}
     inl = {_norm(p["Address"]): _int(p.get("Unique Inlinks")) for p in idx200}
+
+    # Structural gaps for boosting
+    orphans = set(gstats.get("orphan_pages", []))
+    scattered_pages = set()
+    for c in clusters.get("clusters", []):
+        if c.get("authority") == "scattered":
+            scattered_pages.update(c.get("pages", []))
 
     # "important" = top pages by inlinks (hubs/money pages).
     important = sorted(inl, key=lambda u: -inl[u])[:40]
@@ -370,11 +377,19 @@ def link_candidates(graph, relate: dict, pages, max_per_page=5) -> list:
 
     for u in important:
         already = graph["out"].get(u, set())
-        cands = []
+        candidates_with_scores = []
         for e in relate.get(u, []):
             v = e["to"]
             if v in already or v == u:
                 continue
+
+            # Strategic Weighting Formula
+            rel_score = e["score"]
+            boost = 1.0
+            if v in orphans: boost += 0.5
+            if v in scattered_pages: boost += 0.3
+
+            final_score = rel_score * boost
 
             # Deterministic Anchor Generation Hierarchy
             suggested_anchor = None
@@ -389,14 +404,12 @@ def link_candidates(graph, relate: dict, pages, max_per_page=5) -> list:
             if not suggested_anchor:
                 title = (target_page.get("Title 1", "") or "").strip()
                 if title:
-                    # Split by common delimiters and take first part
                     clean_title = re.split(r" [|—\-] ", title)[0].strip()
                     if clean_title and clean_title.lower() not in GENERIC_ANCHORS:
                         suggested_anchor = clean_title
 
             # 3. Shared Topics (Jaccard overlap)
             if not suggested_anchor and e.get("shared"):
-                # Use first shared topic, capitalized
                 topic = e["shared"][0].strip()
                 if topic and topic.lower() not in GENERIC_ANCHORS:
                     suggested_anchor = topic.capitalize()
@@ -409,18 +422,26 @@ def link_candidates(graph, relate: dict, pages, max_per_page=5) -> list:
                     if slug and slug.lower() not in GENERIC_ANCHORS:
                         suggested_anchor = slug
 
-            # Final fallback if everything failed (rare)
             if not suggested_anchor:
                 suggested_anchor = "Learn more" if "Learn more" not in GENERIC_ANCHORS else None
 
-            cands.append({
+            candidates_with_scores.append({
                 "target": v,
-                "relatedness": e["score"],
+                "relatedness": rel_score,
+                "final_score": final_score,
                 "shared_topics": e["shared"],
                 "suggested_anchor": suggested_anchor
             })
-            if len(cands) >= max_per_page:
-                break
+
+        # Sort by strategic final_score instead of pure relatedness
+        candidates_with_scores.sort(key=lambda x: (-x["final_score"], x["target"]))
+
+        # Remove final_score from output to maintain schema compatibility
+        cands = []
+        for c in candidates_with_scores[:max_per_page]:
+            c.pop("final_score", None)
+            cands.append(c)
+
         if cands:
             out.append({"source": u, "candidates": cands})
     return out
@@ -438,7 +459,7 @@ def analyze(export_dir: str) -> dict:
     anchors = anchor_analysis(inlinks)
     clusters = cluster_pages(pages, text)
     relate = relatedness(clusters["page_keywords"])
-    cands = link_candidates(graph, relate, pages)
+    cands = link_candidates(graph, relate, pages, gstats, clusters)
     return {
         "pages": pages, "graph": graph, "graph_stats": gstats,
         "anchors": anchors, "clusters": clusters, "relatedness": relate,

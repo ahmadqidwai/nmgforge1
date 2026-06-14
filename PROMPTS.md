@@ -61,6 +61,18 @@ Format per entry:
    **For:** Improving recommendation quality by replacing null suggested anchors with meaningful SEO-friendly anchor suggestions.
 
    **Revised?** No.
+   11. **Prompt:** Review the recommendation ranking and relatedness scoring logic in analyzer.py. Analyze how relatedness is calculated, how recommendations are prioritized, identify weaknesses in the current approach, estimate scoring impact, and propose the single highest-impact deterministic improvement. Show the exact functions involved and provide an implementation plan. Do not modify code yet.
+
+**For:** Identifying the next highest-value improvement after anchor generation and evaluating how recommendation quality can be improved while remaining deterministic.
+
+**Revised?** No.
+12. **Prompt:** Implement the strategic priority weighting improvement. Keep the existing relatedness calculation, add deterministic boosts for orphan pages and scattered clusters, explain the scoring formula before coding, preserve report.json compatibility, run the sample dataset, and verify the results.
+
+**For:** Improving recommendation ranking by prioritizing pages that solve structural SEO issues instead of relying only on keyword similarity.
+
+**Revised?** Yes - checked the sample dataset before implementation and found 0 orphan pages and 178 scattered-cluster pages, then adjusted the implementation to remain useful for hidden grading datasets while preserving deterministic behavior.
+
+
 
 
 
