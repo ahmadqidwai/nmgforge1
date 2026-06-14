@@ -50,5 +50,20 @@ Format per entry:
    **For:** Comparing the existing implementation against a strict top-5% interpretation and determining whether a code change was justified.
 
    **Revised?** No.
+   8. **Prompt:** Review analyzer.py and focus only on the link_candidates() function. The system currently identifies related pages but returns suggested_anchor=None for every recommendation. Design and implement a deterministic anchor generation system using the target page's H1, Title, and keywords. Generate descriptive SEO-friendly anchors, avoid generic anchors, keep the implementation deterministic and reproducible, explain the design before modifying code, and show before/after examples from the sample dataset. Do not modify any other part of the analyzer.
+
+   **For:** Improving recommendation quality by generating meaningful suggested anchors instead of returning null values.
+
+   **Revised?** No.
+
+   9. **Prompt:** Review analyzer.py and focus only on the link_candidates() function. Design a deterministic anchor generation system that uses H1 tags, page titles, shared topics, and URL slugs to generate descriptive suggested anchors. Avoid generic anchors, keep the implementation reproducible, explain the design before coding, and show example outputs from the sample dataset.
+
+   **For:** Improving recommendation quality by replacing null suggested anchors with meaningful SEO-friendly anchor suggestions.
+
+   **Revised?** No.
+
+
+
+
 
 

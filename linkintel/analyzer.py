@@ -358,17 +358,16 @@ def relatedness(page_keywords: dict, top_per_page=5) -> dict:
 # --------------------------------------------------------------------------- #
 def link_candidates(graph, relate: dict, pages, max_per_page=5) -> list:
     """For each important page, find topically-related pages it does NOT already
-    link to. The model (linker-agent) turns each candidate into a final
-    recommendation with a suggested anchor.
-
-    STARTER returns the raw candidates (deterministic). It does NOT write anchors -
-    that is the model's job (see agents/linker.md).
+    link to. Now generates deterministic suggested anchors based on target metadata.
     """
     idx200 = [p for p in pages if is_html(p) and is_200(p) and indexable(p)]
+    by_url = {_norm(p["Address"]): p for p in idx200}
     inl = {_norm(p["Address"]): _int(p.get("Unique Inlinks")) for p in idx200}
-    # "important" = top pages by inlinks (hubs/money pages). Tune as needed.
+
+    # "important" = top pages by inlinks (hubs/money pages).
     important = sorted(inl, key=lambda u: -inl[u])[:40]
     out = []
+
     for u in important:
         already = graph["out"].get(u, set())
         cands = []
@@ -376,8 +375,50 @@ def link_candidates(graph, relate: dict, pages, max_per_page=5) -> list:
             v = e["to"]
             if v in already or v == u:
                 continue
-            cands.append({"target": v, "relatedness": e["score"], "shared_topics": e["shared"],
-                          "suggested_anchor": None})  # TODO: model writes the anchor
+
+            # Deterministic Anchor Generation Hierarchy
+            suggested_anchor = None
+            target_page = by_url.get(v, {})
+
+            # 1. H1 Tag (Strongest)
+            h1 = (target_page.get("H1-1", "") or "").strip()
+            if h1 and h1.lower() not in GENERIC_ANCHORS:
+                suggested_anchor = h1
+
+            # 2. Cleaned Title
+            if not suggested_anchor:
+                title = (target_page.get("Title 1", "") or "").strip()
+                if title:
+                    # Split by common delimiters and take first part
+                    clean_title = re.split(r" [|—\-] ", title)[0].strip()
+                    if clean_title and clean_title.lower() not in GENERIC_ANCHORS:
+                        suggested_anchor = clean_title
+
+            # 3. Shared Topics (Jaccard overlap)
+            if not suggested_anchor and e.get("shared"):
+                # Use first shared topic, capitalized
+                topic = e["shared"][0].strip()
+                if topic and topic.lower() not in GENERIC_ANCHORS:
+                    suggested_anchor = topic.capitalize()
+
+            # 4. URL Slug Humanization
+            if not suggested_anchor:
+                path = urlparse(v).path.strip("/")
+                if path:
+                    slug = path.split("/")[-1].replace("-", " ").replace("_", " ").title()
+                    if slug and slug.lower() not in GENERIC_ANCHORS:
+                        suggested_anchor = slug
+
+            # Final fallback if everything failed (rare)
+            if not suggested_anchor:
+                suggested_anchor = "Learn more" if "Learn more" not in GENERIC_ANCHORS else None
+
+            cands.append({
+                "target": v,
+                "relatedness": e["score"],
+                "shared_topics": e["shared"],
+                "suggested_anchor": suggested_anchor
+            })
             if len(cands) >= max_per_page:
                 break
         if cands:
