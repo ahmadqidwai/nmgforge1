@@ -90,6 +90,83 @@ The result (accuracy + working code + the repo) is the primary basis. Process is
 If your model DOES write `audit.jsonl` (local sessions), commit it too - it only helps. If it
 does not, you lose nothing. The hooks ship enabled as a convenience; leaving them on is fine
 on every model.
+## Improvements Implemented
+
+During the hackathon, the following improvements were made to the baseline implementation:
+
+### 1. Over-Linked Page Detection
+
+* Replaced percentile-threshold logic with deterministic top-5%-of-population selection.
+* Eliminated tie inflation issues where too many pages could be classified as over-linked.
+* Results now align more closely with the rulebook definition.
+
+### 2. Deterministic Anchor Generation
+
+* Added automatic anchor generation for internal link recommendations.
+* Anchor selection hierarchy:
+
+  * H1
+  * Page Title
+  * Shared Topics
+  * Humanized URL Slug
+* Removed null anchor suggestions from recommendation output.
+
+### 3. Strategic Recommendation Ranking
+
+* Recommendation ranking now considers structural SEO signals.
+* Added deterministic weighting for:
+
+  * Orphan pages
+  * Scattered topical clusters
+* Recommendations prioritize pages that improve site architecture, not just keyword similarity.
+
+### 4. Topic-Based Clustering
+
+* Replaced URL-folder-based grouping with keyword-driven clustering.
+* Clusters are now generated using page content signals derived from TF keyword extraction.
+* Better aligns cluster generation with topical authority analysis.
+
+## Current Architecture
+
+### Deterministic Layer (`linkintel/analyzer.py`)
+
+Handles:
+
+* Link graph analysis
+* Orphan detection
+* Over-linked page detection
+* Anchor classification
+* Topic clustering
+* Relatedness scoring
+* Internal link recommendation generation
+
+### MCP Layer (`mcp/server.py`)
+
+Handles:
+
+* Dashboard hosting
+* Tool orchestration
+* Report generation
+
+### Output Artifacts
+
+Running:
+
+```bash
+python run.py sample-export/
+```
+
+Generates:
+
+* `outputs/report.json`
+* `outputs/report.html`
+
+and launches the dashboard at:
+
+```text
+http://localhost:7700
+```
+
 
 ## Submission
 Submit your public GitHub repo link on the **build page** (not a third-party platform). See
