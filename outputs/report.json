@@ -7,7 +7,7 @@
     "internal_links": 12420,
     "orphan_pages": 0,
     "broken_internal_links": 73,
-    "generic_anchors": 157,
+    "generic_anchors": 143,
     "topical_clusters": 93,
     "link_recommendations": 30
   },
@@ -9813,11 +9813,6 @@
         "anchor": "Discover More"
       },
       {
-        "source": "https://nmgtechnologies.com/resources/faq",
-        "destination": "https://nmgtechnologies.com/resources/faq",
-        "anchor": "here"
-      },
-      {
         "source": "https://nmgtechnologies.com",
         "destination": "https://nmgtechnologies.com/ai-powered-business-process-transformation",
         "anchor": "Read More"
@@ -10438,11 +10433,6 @@
         "anchor": "Read More"
       },
       {
-        "source": "https://nmgtechnologies.com/blog/covid-19-resources",
-        "destination": "https://go.microsoft.com/fwlink/p/?linkid=873020&lm=deeplink&lmsrc=homePageWeb&cmpid=WebSignIn",
-        "anchor": "here"
-      },
-      {
         "source": "https://nmgtechnologies.com/resources/library",
         "destination": "https://nmgtechnologies.com/resources/library/python-development-guide",
         "anchor": "Know More"
@@ -10458,64 +10448,9 @@
         "anchor": "Know More"
       },
       {
-        "source": "https://nmgtechnologies.com/blog/5-website-design-trends-invest-2017",
-        "destination": "https://nmgtechnologies.com/contact-us",
-        "anchor": "here"
-      },
-      {
         "source": "https://nmgtechnologies.com/blog/nmg-recognized-top-performing-mobile-app-development-company-goodfirms",
         "destination": "https://www.goodfirms.co/companies/view/746/nmg-technologies",
         "anchor": "Read more"
-      },
-      {
-        "source": "https://nmgtechnologies.com/blog/wordpress-website-perfect-solution-small-business",
-        "destination": "https://nmgtechnologies.com/web-development-company",
-        "anchor": "here"
-      },
-      {
-        "source": "https://nmgtechnologies.com/resources/library/hire-web-developers-guide",
-        "destination": "https://golang.org",
-        "anchor": "Go"
-      },
-      {
-        "source": "https://nmgtechnologies.com/resources/library/mobile-app-development-guide",
-        "destination": "https://www.justinmind.com/blog/a-beginners-guide-to-user-flows-and-how-to-prototype-them-using-justinmind",
-        "anchor": "here"
-      },
-      {
-        "source": "https://nmgtechnologies.com/mobile-app-design",
-        "destination": "https://www.justinmind.com/blog/a-beginners-guide-to-user-flows-and-how-to-prototype-them-using-justinmind",
-        "anchor": "here"
-      },
-      {
-        "source": "https://nmgtechnologies.com/resources/library/mobile-app-development-guide",
-        "destination": "https://magnetoitsolutions.com/blog/mobile-app-development-programming-languages",
-        "anchor": "here"
-      },
-      {
-        "source": "https://nmgtechnologies.com/resources/library/mobile-app-development-guide",
-        "destination": "https://www.creativebloq.com/advice/mobile-app-design",
-        "anchor": "here"
-      },
-      {
-        "source": "https://nmgtechnologies.com/mobile-app-design",
-        "destination": "https://www.creativebloq.com/advice/mobile-app-design",
-        "anchor": "here"
-      },
-      {
-        "source": "https://nmgtechnologies.com/resources/library/mobile-app-development-guide",
-        "destination": "https://searchmobilecomputing.techtarget.com/definition/mobile-UI-mobile-user-interface",
-        "anchor": "here"
-      },
-      {
-        "source": "https://nmgtechnologies.com/resources/library/mobile-app-development-guide",
-        "destination": "https://www.ready4s.com/blog/android-vs-ios-comparing-ui-design",
-        "anchor": "here"
-      },
-      {
-        "source": "https://nmgtechnologies.com/mobile-app-design",
-        "destination": "https://www.ready4s.com/blog/android-vs-ios-comparing-ui-design",
-        "anchor": "here"
       },
       {
         "source": "https://nmgtechnologies.com/blog/industry-roundup-december-2013",
@@ -10533,19 +10468,14 @@
         "anchor": "LEARN MORE"
       },
       {
-        "source": "https://nmgtechnologies.com/blog/web-application-testing-checklist",
-        "destination": "https://www.softwaretestingmaterial.com/performance-testing-types",
-        "anchor": "link"
-      },
-      {
-        "source": "https://nmgtechnologies.com/blog/web-application-testing-checklist",
-        "destination": "https://medium.com/@briananderson2209/best-automation-testing-tools-for-2018-top-10-reviews-8a4a19f664d2",
-        "anchor": "here"
-      },
-      {
         "source": "https://growth.nmgtechnologies.com/brightonseo",
         "destination": "https://nmgtechnologies.com/blog/nmg-technologies-to-sponsor-and-exhibit-at-brighton-seo-and-online-pr-show-2023.html",
         "anchor": "View More"
+      },
+      {
+        "source": "https://nmgtechnologies.com/blog/ada-compliance-website-checklist",
+        "destination": "https://www.access-board.gov/guidelines-and-standards/communications-and-it/about-the-section-508-standards/guide-to-the-section-508-standards/web-based-intranet-and-internet-information-and-applications-1194-22",
+        "anchor": "Read here"
       },
       {
         "source": "https://nmgtechnologies.com/blog/industry-roundup-december-2013",
@@ -31317,6 +31247,6 @@
   "run_meta": {
     "model": "gpt-oss:20b-cloud",
     "model_calls": 0,
-    "duration_sec": 0.5
+    "duration_sec": 0.6
   }
 }

@@ -24,10 +24,27 @@ csv.field_size_limit(10_000_000)
 # generic / non-descriptive anchors (lowercased, stripped). Extend per rulebook.
 # --------------------------------------------------------------------------- #
 GENERIC_ANCHORS = {
-    "click here", "read more", "read more...", "learn more", "more", "here",
-    "this", "this page", "link", "view more", "see more", "details", "more details",
-    "know more", "discover more", "find out more", "continue reading", "go",
-    "click", "view", "see details", "more info", "info",
+    "click here",
+    "read more",
+    "learn more",
+    "more",
+    "details",
+    "view more",
+    "see more",
+    "continue reading",
+    "continue",
+    "visit page",
+    "visit website",
+    "check it out",
+    "explore",
+    "know more",
+    "discover more",
+    "find out more",
+    "learn more here",
+    "read here",
+    "view details",
+    "read now",
+    "start here"
 }
 
 STOPWORDS = set("""a an the and or but if then else for to of in on at by with from as is are was were be been being this that these those it its we you they he she them our your their i me my mine our ours us not no yes do does did doing have has had having will would can could should may might must shall about into over under again further once here there all any both each few more most other some such only own same so than too very s t can just don now get got also into out up down off above below""".split())
