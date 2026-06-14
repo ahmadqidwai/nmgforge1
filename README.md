@@ -175,3 +175,23 @@ the build brief for the full checklist and deadline.
 ## Note
 The dashboard renders the operator's own crawl data on localhost; it is a local cockpit, not a
 hardened public server. The shareable artifact is the exported `report.html`.
+## Validation
+
+Verified using the provided sample Screaming Frog export.
+
+Successful outputs:
+
+- outputs/report.json
+- outputs/report.html
+- localhost dashboard (http://localhost:7700)
+
+Validated features:
+
+- Internal link graph analysis
+- Orphan page detection
+- Over-linked page detection
+- Generic anchor detection
+- Topical clustering
+- Relatedness graph generation
+- Contextual link recommendations
+- Deterministic anchor suggestions

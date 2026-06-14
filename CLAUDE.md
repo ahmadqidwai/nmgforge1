@@ -88,6 +88,12 @@ recommendations**. It serves a live dashboard at localhost:7700 and outputs
 * Generic corporate, navigation, and SEO boilerplate terms should be excluded from topical analysis whenever possible.
 * Stopword improvements affect clustering, relatedness scoring, entity relationships, and link recommendations indirectly.
 * Filtering noise is preferred over introducing non-deterministic NLP techniques.
+* Final validation completed successfully on the sample export.
+* Dashboard, report.json, and report.html generate without errors.
+* Internal linking recommendations now include deterministic anchor suggestions.
+* Recommendation ranking incorporates structural SEO signals.
+* Keyword extraction uses positional weighting and expanded stopword filtering.
+* Cluster names are generated deterministically from page metadata.
 
 
 
