@@ -287,14 +287,15 @@ def cluster_pages(pages, page_text, n_keywords=12) -> dict:
     kw = {}
     for p in idx200:
         u = _norm(p["Address"])
-        path = urlparse(u).path.strip("/")
-        seg = path.split("/")[0] if path else "(home)"
-        clusters[seg].append(u)
-        kw[u] = page_keywords(p, page_text.get(u, ""), n_keywords)
+        # Content-based topic assignment: use the top TF keyword as the cluster key
+        p_kws = page_keywords(p, page_text.get(u, ""), n_keywords)
+        topic = p_kws[0] if p_kws else "(general)"
+        clusters[topic].append(u)
+        kw[u] = p_kws
 
     out = []
     inl = {_norm(p["Address"]): _int(p.get("Unique Inlinks")) for p in idx200}
-    for seg, members in sorted(clusters.items(), key=lambda x: -len(x[1])):
+    for topic, members in sorted(clusters.items(), key=lambda x: -len(x[1])):
         members = sorted(members)
         hub = max(members, key=lambda u: inl.get(u, 0)) if members else None
         hub_inlinks = inl.get(hub, 0)
@@ -306,7 +307,7 @@ def cluster_pages(pages, page_text, n_keywords=12) -> dict:
         for m in members:
             ck.update(kw.get(m, []))
         out.append({
-            "key": seg,
+            "key": topic,
             "name": None,  # TODO: model names this cluster (topic-agent)
             "size": len(members),
             "pages": members,

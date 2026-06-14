@@ -65,5 +65,11 @@ recommendations**. It serves a live dashboard at localhost:7700 and outputs
 * Pages belonging to scattered clusters receive a deterministic ranking boost to improve topical authority.
 * The sample export contains 0 orphan pages and 178 scattered-cluster pages, so weighting has limited visible impact on the sample but should help on unseen datasets.
 * report.json compatibility is preserved by removing internal scoring fields before writing output.
+* Current cluster generation relies primarily on the first URL path segment.
+* Page content and extracted keywords are currently used for cluster descriptions but not for actual cluster formation.
+* URL-based clustering can incorrectly group unrelated pages (for example, all blog posts) into a single cluster.
+* Topically similar pages can be separated into different clusters if they exist under different URL paths.
+* Improving clustering quality is likely one of the highest remaining scoring opportunities because cluster quality affects authority analysis and recommendation quality.
+* Any clustering improvements should remain deterministic and preserve report.json compatibility.
 
 

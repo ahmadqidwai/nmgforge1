@@ -71,6 +71,12 @@ Format per entry:
 **For:** Improving recommendation ranking by prioritizing pages that solve structural SEO issues instead of relying only on keyword similarity.
 
 **Revised?** Yes - checked the sample dataset before implementation and found 0 orphan pages and 178 scattered-cluster pages, then adjusted the implementation to remain useful for hidden grading datasets while preserving deterministic behavior.
+14. **Prompt:** Implement the smallest high-impact clustering improvement that moves clustering closer to topic-based grouping while remaining deterministic. Reuse page_keywords(), preserve report.json compatibility, explain the approach before coding, run the sample dataset, and verify the results.
+
+**For:** Improving topical cluster quality while minimizing implementation risk and preserving deterministic behavior.
+
+**Revised?** No.
+
 
 
 

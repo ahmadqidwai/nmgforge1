@@ -39,5 +39,19 @@ Format:
 
 * `[02:45]` Identified strategic recommendation weighting as the next highest-impact improvement -> recommendations should prioritize pages that strengthen site structure, not just pages with the highest keyword overlap.
 - `[03:05]` Checked structural-gap distribution before implementing recommendation weighting -> found 0 orphan pages and 178 scattered-cluster pages in the sample dataset. Decided to proceed because orphan prioritization is still valuable for unseen grading datasets and directly aligns with the rulebook.
+- `[03:10]` Implemented strategic recommendation weighting -> recommendations now combine relatedness with structural SEO signals instead of relying only on keyword similarity.
+
+- `[03:15]` Verified recommendation weighting update -> report.json and report.html generated successfully, recommendation count remained stable, and schema compatibility was preserved.
+* `[03:30]` Reviewed topical clustering implementation -> found that clusters are currently created using URL path segments rather than actual page topics.
+
+* `[03:32]` Identified clustering quality as a major weakness -> incorrect clusters can affect authority analysis, entity relationships, and recommendation quality.
+
+* `[03:35]` Chose clustering as the next improvement area because it offers higher scoring potential than further recommendation tuning and aligns directly with the rulebook's topical authority requirements.
+* `[03:39]` Replaced URL-path clustering with keyword-based topic assignment -> clusters are now formed using the dominant TF keyword from page content instead of the first URL path segment.
+
+* `[03:42]` Accepted a more granular clustering strategy -> increased cluster count from 33 to 93 in exchange for grouping pages by content signals rather than site structure.
+
+* `[03:45]` Verified clustering update -> report.json and report.html generated successfully and no schema compatibility issues were introduced.
+
 
 
