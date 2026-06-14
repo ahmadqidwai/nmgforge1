@@ -76,6 +76,17 @@ Format per entry:
 **For:** Improving topical cluster quality while minimizing implementation risk and preserving deterministic behavior.
 
 **Revised?** No.
+15. **Prompt:** Review the current implementation of page_keywords() and cluster naming logic. Identify weaknesses in keyword extraction quality, noisy keywords affecting clustering and recommendations, weaknesses in cluster naming, rank the two highest-impact deterministic improvements, estimate scoring impact, and show which functions should be modified. Do not modify code yet.
+
+**For:** Finding high-impact, low-effort improvements to keyword extraction and cluster quality while working within a limited token budget.
+
+**Revised?** No.
+16. **Prompt:** Implement only the positional weighting improvement. Modify page_keywords() so that Title and H1 content receive higher weight than body text. Keep the implementation deterministic, preserve report.json compatibility, run the sample dataset after implementation, and show example keyword extraction before vs after. Do not implement brand-aware filtering or any other unrelated changes.
+
+**For:** Improving keyword extraction quality by prioritizing strong SEO signals (Title and H1) over general body content.
+
+**Revised?** No.
+
 
 
 

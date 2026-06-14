@@ -52,6 +52,16 @@ Format:
 * `[03:42]` Accepted a more granular clustering strategy -> increased cluster count from 33 to 93 in exchange for grouping pages by content signals rather than site structure.
 
 * `[03:45]` Verified clustering update -> report.json and report.html generated successfully and no schema compatibility issues were introduced.
+* `[03:55]` Reviewed keyword extraction and cluster naming quality -> found that page_keywords() treats title, H1, and body content equally, which can dilute topical signals.
+
+* `[04:00]` Selected positional weighting as the next improvement -> giving additional weight to title and H1 content should improve clustering, relatedness scoring, and recommendation quality with minimal implementation risk.
+
+* `[04:05]` Deferred brand-aware filtering -> positional weighting offers higher value for lower effort and better aligns with the remaining token budget.
+* `[04:10]` Implemented positional weighting in page_keywords() -> Title and H1 terms now receive higher weight than body content when generating page keywords.
+
+* `[04:15]` Verified positional weighting update -> report.json and report.html generated successfully and keyword extraction became more aligned with page intent signals.
+
+* `[04:20]` Prioritized heading-based relevance over raw term frequency -> stronger topical signals now have greater influence on clustering and relatedness calculations.
 
 
 

@@ -71,5 +71,14 @@ recommendations**. It serves a live dashboard at localhost:7700 and outputs
 * Topically similar pages can be separated into different clusters if they exist under different URL paths.
 * Improving clustering quality is likely one of the highest remaining scoring opportunities because cluster quality affects authority analysis and recommendation quality.
 * Any clustering improvements should remain deterministic and preserve report.json compatibility.
+* page_keywords() currently relies on term frequency and does not distinguish between title, H1, and body content.
+* Title and H1 text are stronger topical signals than body content and are good candidates for deterministic weighting.
+* Keyword quality directly affects clustering, relatedness scoring, and recommendation quality.
+* Brand-aware filtering remains a possible future improvement but was deferred in favor of positional weighting due to lower implementation effort.
+* Improvements should continue to prioritize deterministic behavior and report.json compatibility.
+* page_keywords() now uses positional weighting instead of treating all content equally.
+* Title and H1 content receive higher importance than body text when extracting keywords.
+* Keyword extraction quality directly influences clustering, relatedness scoring, entity relationships, and recommendation quality.
+* Positional weighting remains fully deterministic and schema-compatible.
 
 

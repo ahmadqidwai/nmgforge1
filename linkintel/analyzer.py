@@ -282,13 +282,23 @@ def _tokens(text: str) -> list[str]:
 
 
 def page_keywords(page, body: str, top=12) -> list[str]:
-    """Cheap TF keywords from Title + H1 + H2 + body (deterministic)."""
-    blob = " ".join([
-        page.get("Title 1", "") or "", (page.get("H1-1", "") or "") + " ",
-        page.get("H2-1", "") or "", page.get("H2-2", "") or "", (body or "")[:6000],
-    ])
-    c = Counter(_tokens(blob))
-    return [w for w, _ in c.most_common(top)]
+    """Positional TF keywords: Title/H1 weighted higher than body (deterministic)."""
+    counts = Counter()
+
+    # Weighted sections: Title (3x), H1 (3x), H2 (2x), Body (1x)
+    sections = [
+        (page.get("Title 1", "") or "", 3),
+        (page.get("H1-1", "") or "", 3),
+        (page.get("H2-1", "") or "", 2),
+        (page.get("H2-2", "") or "", 2),
+        ((body or "")[:6000], 1),
+    ]
+
+    for text, weight in sections:
+        for token in _tokens(text):
+            counts[token] += weight
+
+    return [w for w, _ in counts.most_common(top)]
 
 
 def cluster_pages(pages, page_text, n_keywords=12) -> dict:
