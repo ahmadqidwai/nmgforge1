@@ -67,6 +67,14 @@ Format:
 * `[04:25]` Kept cluster assignment logic unchanged -> focused only on naming quality to improve report readability without affecting clustering behavior.
 
 * `[04:30]` Verified cluster naming update -> report.json and report.html generated successfully and cluster names became more understandable for end users.
+* `[04:39]` Expanded STOPWORDS list to remove common SEO and corporate-site noise terms such as company, services, technology, client, contact, resources, and blog.
+
+* `[04:40]` Kept keyword extraction algorithm unchanged -> improved signal quality through filtering rather than modifying clustering logic.
+
+* `[04:42]` Verified stopword update -> sample export completed successfully and report generation remained schema-compatible.
+
+* `[04:45]` Reduced topic contamination from navigation and branding terms to improve clustering, relatedness scoring, and recommendation quality.
+
 
 
 

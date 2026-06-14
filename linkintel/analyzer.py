@@ -47,8 +47,16 @@ GENERIC_ANCHORS = {
     "start here"
 }
 
-STOPWORDS = set("""a an the and or but if then else for to of in on at by with from as is are was were be been being this that these those it its we you they he she them our your their i me my mine our ours us not no yes do does did doing have has had having will would can could should may might must shall about into over under again further once here there all any both each few more most other some such only own same so than too very s t can just don now get got also into out up down off above below""".split())
+STOPWORDS = set("""a an the and or but if then else for to of in on at by with from as is are was were be been being this that these those it its we you they he she them our your their i me my mine our ours us not no yes do does did doing have has had having will would can could should may might must shall about into over under again further once here there all any both each few more most other some such only own same so than too very s t can just don now get got also into out up down off above below
 
+home page website site company companies business businesses service services solution solutions technology technologies digital professional professionals client clients customer customers partner partners team contact contacts support help resource resources blog blogs article articles case study studies success story stories industry industries market markets enterprise enterprises
+
+welcome discover explore learn read view details information content category categories tag tags author authors menu navigation footer header copyright privacy terms
+
+development developing developer developers application applications software system systems platform platforms project projects product products tool tools tools-based
+
+nmg
+""".split())
 
 # --------------------------------------------------------------------------- #
 # parsing helpers

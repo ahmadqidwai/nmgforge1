@@ -84,6 +84,10 @@ recommendations**. It serves a live dashboard at localhost:7700 and outputs
 * Cluster assignment and cluster naming are separate concerns and can be improved independently.
 * Improvements to naming should use existing cluster keywords and page metadata while remaining deterministic.
 * Report readability is improved when cluster names reflect topics rather than isolated keywords.
+* Keyword extraction quality depends heavily on stopword filtering.
+* Generic corporate, navigation, and SEO boilerplate terms should be excluded from topical analysis whenever possible.
+* Stopword improvements affect clustering, relatedness scoring, entity relationships, and link recommendations indirectly.
+* Filtering noise is preferred over introducing non-deterministic NLP techniques.
 
 
 

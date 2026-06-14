@@ -91,6 +91,12 @@ Format per entry:
 **For:** Improving the readability and usefulness of topical cluster names without changing the underlying clustering algorithm.
 
 **Revised?** No.
+19. **Prompt:** Review the current STOPWORDS list used by page_keywords(). Identify generic SEO, navigation, and corporate website terms that add noise to keyword extraction and clustering. Expand the stopword list deterministically without changing any other analysis logic. Preserve report.json compatibility and verify the sample export still runs successfully.
+
+**For:** Improving topical signal quality by removing high-frequency low-value terms that appear across many pages.
+
+**Revised?** No.
+
 
 
 
